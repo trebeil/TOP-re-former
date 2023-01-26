@@ -1,4 +1,5 @@
-<form action="/users" method="post" accept-charset="UTF-8">
+<!-- Pure HTML form, using no form helpers -->
+<!-- <form action="/users" method="post" accept-charset="UTF-8">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
   <div>
@@ -23,4 +24,30 @@
   <% @user.errors.each do |error| %>
     <p> <%= error.full_message %> </p>
   <% end %>
-</form>
+</form> -->
+
+<!-- Using form_tag -->
+<%= form_tag('/users') do %>
+  <div>
+    <%= label_tag 'email', 'E-mail:' %>
+    <%= email_field_tag 'email', @user.email %>
+  </div>
+
+  <div>
+    <%= label_tag 'username', 'Username:' %>
+    <%= text_field_tag 'username', @user.username %>
+  </div>
+
+  <div>
+    <%= label_tag 'password', 'Password:' %>
+    <%= password_field_tag 'password' %>
+  </div>
+
+  <div>
+    <%= submit_tag 'Create profile' %>
+  </div>
+
+  <% @user.errors.each do |error| %>
+    <p> <%= error.full_message %> </p>
+  <% end %>
+<% end %>
