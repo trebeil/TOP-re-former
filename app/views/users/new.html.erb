@@ -74,6 +74,11 @@
   </div>
 <% end %>
 
-<% @user.errors.each do |error| %>
-    <p> <%= error.full_message %> </p>
+<% if @user.errors.count != 0 %>
+  <p>Please observe the following instructions:</p>
+  <ul>
+    <% @user.errors.each do |error| %>
+        <li> <%= error.full_message %> </li>
+    <% end %>
+  </ul>
 <% end %>
