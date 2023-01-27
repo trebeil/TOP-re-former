@@ -8,8 +8,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      flash[:success] = 'User successfully created!'
       redirect_to new_user_path
     else
+      flash.now[:error] = 'Please review your inputs and try again.'
       render :new, status: :unprocessable_entity
     end
   end
@@ -22,8 +24,10 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
 
     if @user.update(user_params)
+      flash[:success] = 'User successfully updated!'
       redirect_to edit_user_path(params[:id])
     else
+      flash.now[:error] = 'Please review your inputs and try again.'
       render :edit, status: :unprocessable_entity
     end
   end
